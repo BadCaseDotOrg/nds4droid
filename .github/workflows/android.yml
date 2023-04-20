@@ -18,5 +18,7 @@ jobs:
         with:
           java-version: 11.0.12
           distribution: 'adopt'
+      - name: Set executable permissions for Gradle wrapper
+        run: chmod +x ./gradlew # set executable permissions for Gradle wrapper
       - name: Build with Gradle
         run: ./gradlew assembleDebug
