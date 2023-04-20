@@ -141,6 +141,16 @@ public class MainActivity extends Activity implements OnSharedPreferenceChangeLi
 		
 		
 		if(!DeSmuME.inited) 
+		String passedPath = getIntent().getStringExtra("path");
+    if (passedPath != null) {
+        // If the path is present, proceed as if it was obtained from file picker
+        final File romDir = new File(passedPath);
+        prefs.edit().putString(Settings.LAST_ROM_DIR, romDir.getParent()).apply();
+        runEmulation();
+        coreThread.loadRom(passedPath);
+        timeAtLastAutosave = System.currentTimeMillis();
+        scheduleAutosave();
+    }
 			pickRom();
 		
 	}
